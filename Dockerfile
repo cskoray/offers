@@ -1,7 +1,7 @@
 FROM openjdk:17-jdk-slim AS builder
 ADD . /src
 WORKDIR /src
-RUN ./gradlew offers:clean offers:build  offers:bootJar
+RUN mvn clean package
 
 FROM openjdk:17-jdk-slim
 EXPOSE 8080
