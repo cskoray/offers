@@ -1,4 +1,4 @@
-name: Offers CICD
+name: offers CICD
 
 on:
   push:
