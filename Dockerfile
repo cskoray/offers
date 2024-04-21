@@ -1,13 +1,18 @@
-FROM openjdk:17-jdk-slim AS builder
-ADD . /src
-WORKDIR /src
-RUN mvn clean package
+#
+# Build stage
+#
+FROM eclipse-temurin:17-jdk-jammy AS build
+ENV HOME=/usr/app
+RUN mkdir -p $HOME
+WORKDIR $HOME
+ADD . $HOME
+RUN --mount=type=cache,target=/root/.m2 ./mvnw -f $HOME/pom.xml clean package
 
-FROM openjdk:17-jdk-slim
+#
+# Package stage
+#
+FROM eclipse-temurin:17-jre-jammy 
+ARG JAR_FILE=/usr/app/target/*.jar
+COPY --from=build $JAR_FILE /app/offers.jar
 EXPOSE 8080
-COPY --from=builder /src/service/build/libs/offers-*.jar /usr/local/bin/offers.jar
-HEALTHCHECK --retries=12 --interval=10s CMD curl -s localhost:8080/health || exit 1
-RUN chmod +x /usr/local/bin/offers.jar
-ENTRYPOINT ["java", "-jar", "/usr/local/bin/offers.jar"]
-
-VOLUME /usr/local/offers
+ENTRYPOINT java -jar /app/offers.jar
