@@ -1,4 +1,4 @@
-name: offers CICD
+name: offers ci
 
 on:
   push:
