@@ -1,2 +1,43 @@
 server:
   port: 8080
+
+management:
+  endpoints:
+    web:
+      expose: "*"
+      base-path: "/"
+      path-mapping:
+        prometheus: "metrics"
+      exposure:
+        include: [ "health", "info", "prometheus" ]
+  info:
+    git:
+      mode: full
+spring:
+  data:
+    jpa:
+      repositories:
+        bootstrap-mode: deferred
+  datasource:
+    url: jdbc:postgresql://offers.cxdzri3juk8x.eu-west-2.rds.amazonaws.com:5432/offers
+    username: ${DATASOURCE_USERNAME}
+    password: ${DATASOURCE_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    open-in-view: false
+    properties:
+      hibernate:
+        ddl-auto: validate
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        use_sql_comments: false
+        format_sql: false
+        current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
+    show-sql: false
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-master.xml
+
+logging:
+  level:
+    root: info
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} %5p --- [%15.15t] %-40.40logger{39} :: %X{X-Trace-Id} : %m%n%ex{full}"
