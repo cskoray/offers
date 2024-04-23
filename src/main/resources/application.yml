@@ -20,7 +20,7 @@ spring:
         bootstrap-mode: deferred
   datasource:
     url: jdbc:postgresql://offers.cxdzri3juk8x.eu-west-2.rds.amazonaws.com:5432/offers
-    username: ${DATASOURCE_USERNAME}
+    username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
   jpa:
