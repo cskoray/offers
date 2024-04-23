@@ -18,4 +18,4 @@ jobs:
       - name: Delete old Docker container
         run: sudo docker rm -f offers-container || true
       - name: Run Docker container
-        run: sudo docker run -d -e DATASOURCE_USERNAME=${{ secrets.DATASOURCE_USERNAME }} -e DATASOURCE_PASSWORD=${{ secrets.DATASOURCE_PASSWORD }} --name offers-container -p 8080:8080 cskoray/offers
+        run: sudo docker run -d -e DATASOURCE_USERNAME=${{ secrets.DATASOURCE_USERNAME }} -e DATASOURCE_PASSWORD=${{ secrets.DATASOURCE_PASSWORD }} -e UNSPLASH_ACCESS_KEY=${{ secrets.UNSPLASH_ACCESS_KEY }}  --name offers-container -p 8080:8080 cskoray/offers
