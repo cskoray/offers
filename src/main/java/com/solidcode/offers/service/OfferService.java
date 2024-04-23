@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import com.solidcode.offers.dto.request.OfferRequest;
 import com.solidcode.offers.dto.response.OfferResponse;
 import com.solidcode.offers.exception.OfferNotFoundException;
 import com.solidcode.offers.mapper.OfferMapper;
@@ -13,7 +14,9 @@ import com.solidcode.offers.repository.FavoriteRepository;
 import com.solidcode.offers.repository.OfferRepository;
 import com.solidcode.offers.repository.UserRepository;
 import com.solidcode.offers.repository.entity.Favorite;
+import com.solidcode.offers.repository.entity.Merchant;
 import com.solidcode.offers.repository.entity.Offer;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,18 +29,23 @@ public class OfferService {
     private OfferRepository offerRepository;
     private FavoriteRepository favoriteRepository;
     private UserRepository userRepository;
+    private MerchantService merchantService;
 
     @Autowired
-    public OfferService(OfferMapper offerMapper, OfferRepository offerRepository, final FavoriteRepository favoriteRepository, final UserRepository userRepository) {
+    public OfferService(OfferMapper offerMapper, OfferRepository offerRepository, final FavoriteRepository favoriteRepository, final UserRepository userRepository, final MerchantService merchantService) {
         this.offerMapper = offerMapper;
         this.offerRepository = offerRepository;
         this.favoriteRepository = favoriteRepository;
         this.userRepository = userRepository;
+        this.merchantService = merchantService;
     }
 
-    public OfferResponse saveOffer(final Offer offer) {
+    public OfferResponse saveOffer(final @Valid OfferRequest offerRequest) {
 
+        Offer offer = offerMapper.toOffer(offerRequest);
         offer.setOfferKey(UUID.randomUUID().toString());
+        Merchant merchant = merchantService.getMerchantByMerchantKey(offerRequest.getMerchantKey());
+        offer.setMerchant(merchant);
         Offer saved = offerRepository.save(offer);
         return offerMapper.toOfferResponse(saved);
     }

@@ -45,8 +45,7 @@ public class OfferController {
     @ResponseStatus(CREATED)
     public OfferResponse saveOffer(@Valid @RequestBody OfferRequest request) {
         log.info("OfferController: saveOffer request: {}", request.toString());
-        Offer offer = offerMapper.toOffer(request);
-        return offerService.saveOffer(offer);
+        return offerService.saveOffer(request);
     }
 
     @GetMapping

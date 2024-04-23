@@ -23,7 +23,7 @@ public class MerchantService {
     private LogoFactory logoFactory;
 
     @Autowired
-    public MerchantService(MerchantRepository merchantRepository, MerchantMapper merchantMapper, final LogoFactory logoFactory) {
+    public MerchantService(MerchantRepository merchantRepository, MerchantMapper merchantMapper, LogoFactory logoFactory) {
         this.merchantRepository = merchantRepository;
         this.merchantMapper = merchantMapper;
         this.logoFactory = logoFactory;
@@ -48,13 +48,17 @@ public class MerchantService {
 
     public MerchantResponse getMerchant(String merchantKey) {
 
-        Merchant merchant = merchantRepository.findByMerchantKey(merchantKey).orElseThrow(() -> new MerchantNotFoundException(MERCHANT_NOT_FOUND, "key"));
+        Merchant merchant = getMerchantByMerchantKey(merchantKey);
         return merchantMapper.toMerchantResponse(merchant);
+    }
+
+    protected Merchant getMerchantByMerchantKey(final String merchantKey) {
+        return merchantRepository.findByMerchantKey(merchantKey).orElseThrow(() -> new MerchantNotFoundException(MERCHANT_NOT_FOUND, "key"));
     }
 
     public MerchantResponse updateMerchant(String merchantKey, Merchant merchant) {
 
-        Merchant merchantDb = merchantRepository.findByMerchantKey(merchantKey).orElseThrow(() -> new MerchantNotFoundException(MERCHANT_NOT_FOUND, "key"));
+        Merchant merchantDb = getMerchantByMerchantKey(merchantKey);
         merchantDb.setName(merchant.getName());
         merchantDb.setLogo(merchant.getLogo());
         Merchant updated = merchantRepository.save(merchantDb);

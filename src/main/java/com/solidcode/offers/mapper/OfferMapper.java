@@ -17,5 +17,7 @@ public interface OfferMapper {
     @Mapping(target = "merchantName", source = "merchant.name")
     @Mapping(target = "merchantSite", source = "merchant.site")
     @Mapping(target = "merchantLogo", source = "merchant.logo")
+    @Mapping(target = "offerType", source = "type")
+    @Mapping(target = "merchantKey", source = "merchant.merchantKey")
     OfferResponse toOfferResponse(Offer offer);
 }

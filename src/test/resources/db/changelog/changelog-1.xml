@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+  <changeSet author="koray.kaya" id="111111-1">
+    <createTable tableName="users">
+      <column name="id" type="BIGINT" autoIncrement="true">
+        <constraints nullable="false" primaryKey="true"/>
+      </column>
+      <column name="user_key" type="VARCHAR(36)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="name" type="VARCHAR(35)">
+        <constraints nullable="false" unique="true"/>
+      </column>
+      <column name="email" type="VARCHAR(100)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="created_date" type="TIMESTAMP">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+  </changeSet>
+
+  <changeSet author="koray.kaya" id="111111-2">
+    <createTable tableName="offers">
+      <column name="id" type="BIGINT" autoIncrement="true">
+        <constraints nullable="false" primaryKey="true"/>
+      </column>
+      <column name="offer_key" type="VARCHAR(36)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="offer_description" type="VARCHAR(50)">
+        <constraints nullable="false" unique="true"/>
+      </column>
+      <column name="offer_type" type="VARCHAR(8)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="discount_amount" type="DECIMAL(11,2)" defaultValue="0.00">
+        <constraints nullable="false"/>
+      </column>
+      <column name="merchant_key" type="VARCHAR(36)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="expiry_date" type="TIMESTAMP">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+  </changeSet>
+
+  <changeSet author="koray.kaya" id="111111-3">
+    <createTable tableName="merchants">
+      <column name="id" type="BIGINT" autoIncrement="true">
+        <constraints nullable="false" primaryKey="true"/>
+      </column>
+      <column name="merchant_key" type="VARCHAR(36)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="name" type="VARCHAR(35)">
+        <constraints nullable="false" unique="true"/>
+      </column>
+      <column name="site" type="VARCHAR(100)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="logo" type="VARCHAR(500)">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+  </changeSet>
+
+  <changeSet author="koray.kaya" id="111111-4">
+    <createTable tableName="favorites">
+      <column name="id" type="BIGINT" autoIncrement="true">
+        <constraints nullable="false" primaryKey="true"/>
+      </column>
+      <column name="user_key" type="VARCHAR(36)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="offer_key" type="VARCHAR(36)">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+  </changeSet>
+</databaseChangeLog>

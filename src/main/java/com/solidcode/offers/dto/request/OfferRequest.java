@@ -2,7 +2,6 @@ package com.solidcode.offers.dto.request;
 
 import java.sql.Timestamp;
 
-import com.solidcode.offers.util.OfferType;
 import com.solidcode.offers.validator.ValidOfferType;
 import com.solidcode.offers.validator.ValidUUID;
 import jakarta.validation.constraints.NotNull;
@@ -25,7 +24,7 @@ public class OfferRequest {
     private String description;
 
     @ValidOfferType
-    private OfferType offerType;
+    private String type;
 
     @NotNull
     private double discountAmount;
