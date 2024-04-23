@@ -14,11 +14,11 @@ public class DatabaseEnvironmentLogger {
     private Environment environment;
 
     public void logDatabaseEnvironmentVariables() {
-        System.out.println("=========Database Environment Variables=========");
+        log.info("=========Database Environment Variables=========");
         String dbUsername = environment.getProperty("DATASOURCE_USERNAME");
         String dbPassword = environment.getProperty("DATASOURCE_PASSWORD");
 
-        System.out.println("Database Username-----------> " + dbUsername);
-        System.out.println("Database Password-----------> " + dbPassword);
+        log.info("Database Username-----------> " + dbUsername);
+        log.info("Database Password-----------> " + dbPassword);
     }
 }
