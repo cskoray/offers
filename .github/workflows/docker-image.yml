@@ -21,6 +21,10 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
+      env:
+        DATASOURCE_USERNAME: ${{ secrets.DATASOURCE_USERNAME }}
+        DATASOURCE_PASSWORD: ${{ secrets.DATASOURCE_PASSWORD }}
+        UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
       run: mvn clean install
       
     - name: Build & push Docker image
