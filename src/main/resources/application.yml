@@ -21,7 +21,7 @@ spring:
   datasource:
     url: jdbc:postgresql://offers.cxdzri3juk8x.eu-west-2.rds.amazonaws.com:5432/offers
     username: ${DATASOURCE_USERNAME}
-    password: ${DATASOURCE_PASSWORD:postgres}
+    password: postgres
     driver-class-name: org.postgresql.Driver
   jpa:
     open-in-view: false
