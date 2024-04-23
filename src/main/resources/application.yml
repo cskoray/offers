@@ -39,6 +39,7 @@ spring:
 logging:
   level:
     root: info
+    org.springframework.jdbc.datasource: DEBUG
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss.SSS} %5p --- [%15.15t] %-40.40logger{39} :: %X{X-Trace-Id} : %m%n%ex{full}"
 
