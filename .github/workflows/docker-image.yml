@@ -36,3 +36,7 @@ jobs:
         dockerfile: Dockerfile
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
+      env:
+        DATASOURCE_USERNAME: ${{ secrets.DATASOURCE_USERNAME }}
+        DATASOURCE_PASSWORD: ${{ secrets.DATASOURCE_PASSWORD }}
+        UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
