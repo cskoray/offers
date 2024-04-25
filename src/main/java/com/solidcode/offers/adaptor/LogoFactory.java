@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -14,13 +15,10 @@ import org.springframework.stereotype.Component;
 public class LogoFactory {
 
     @Value("${unsplash.access.key}")
-    private String clientId;
+    String clientId;
 
+    @Autowired
     private UnsplashClient unsplashClient;
-
-    public LogoFactory(final UnsplashClient unsplashClient) {
-        this.unsplashClient = unsplashClient;
-    }
 
     public String getLogo(String merchantName) {
 
