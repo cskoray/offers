@@ -3,20 +3,24 @@ package com.solidcode.offers.adaptor;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class LogoFactory {
 
     @Value("${unsplash.access.key}")
-    String clientId;
+    private String clientId;
 
-    @Autowired
     private UnsplashClient unsplashClient;
+
+    public LogoFactory(final UnsplashClient unsplashClient) {
+        this.unsplashClient = unsplashClient;
+    }
 
     public String getLogo(String merchantName) {
 
