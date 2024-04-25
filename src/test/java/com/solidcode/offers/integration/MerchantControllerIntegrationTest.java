@@ -26,7 +26,7 @@ import org.springframework.test.context.ActiveProfiles;
 @EnableWireMock({
         @ConfigureWireMock(name = "merchant-service", property = "merchant-client.url")
 })
-@ActiveProfiles("dev")
+@ActiveProfiles("test")
 class MerchantControllerIntegrationTest {
 
     @InjectWireMock("merchant-service")
