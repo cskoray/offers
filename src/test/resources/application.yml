@@ -25,3 +25,7 @@ spring:
     show-sql: true
   liquibase:
     change-log: classpath:/db/changelog/changelog-master.xml
+
+unsplash:
+  access:
+    key: xDmX0hLExU7ZO-7ma0Lw37-fFDLCWrC-TrxcZ4rInQE
