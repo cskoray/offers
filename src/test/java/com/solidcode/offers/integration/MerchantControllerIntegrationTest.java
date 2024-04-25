@@ -4,17 +4,14 @@ import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.github.tomakehurst.wiremock.client.WireMock.get;
 import static com.github.tomakehurst.wiremock.client.WireMock.post;
 import static com.solidcode.offers.integration.UnsplashMock.mockClient;
-import static java.nio.charset.Charset.defaultCharset;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
-import static org.springframework.util.FileCopyUtils.copyToString;
 
 import java.io.IOException;
 import java.util.List;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
-import com.github.tomakehurst.wiremock.client.WireMock;
 import com.maciejwalkowiak.wiremock.spring.ConfigureWireMock;
 import com.maciejwalkowiak.wiremock.spring.EnableWireMock;
 import com.maciejwalkowiak.wiremock.spring.InjectWireMock;
@@ -28,11 +25,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.cloud.openfeign.EnableFeignClients;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -62,34 +56,34 @@ class MerchantControllerIntegrationTest {
 
     @Test
     void testSaveMerchant() {
-//        merchantService.stubFor(post("/v1/api/merchants").willReturn(aResponse()
-//                .withHeader("Content-Type", "application/json")
-//                .withBody("""
-//                        { "name": "amazon", "site": "amazon.com" }
-//                        """)));
-//
-//        MerchantRequest merchantRequest = MerchantRequest.builder()
-//                .name("merchant")
-//                .site("merchantSite")
-//                .build();
-//        ResponseEntity<MerchantResponse> response = restTemplate.postForEntity("/v1/api/merchants", merchantRequest, MerchantResponse.class);
-//
-//        assertThat(response.getStatusCode()).isEqualTo(CREATED);
+        merchantService.stubFor(post("/v1/api/merchants").willReturn(aResponse()
+                .withHeader("Content-Type", "application/json")
+                .withBody("""
+                        { "name": "amazon", "site": "amazon.com" }
+                        """)));
+
+        MerchantRequest merchantRequest = MerchantRequest.builder()
+                .name("merchant")
+                .site("merchantSite")
+                .build();
+        ResponseEntity<MerchantResponse> response = restTemplate.postForEntity("/v1/api/merchants", merchantRequest, MerchantResponse.class);
+
+        assertThat(response.getStatusCode()).isEqualTo(CREATED);
     }
 
     @Test
     void testGetMerchants() {
-//        merchantService.stubFor(get("/v1/api/merchants").willReturn(aResponse()
-//                .withHeader("Content-Type", "application/json")
-//                .withBody("""
-//                        [
-//                            { "name": "amazon", "site": "amazon.com" },
-//                            { "name": "ebay", "site": "ebay.com" }
-//                        ]
-//                        """)));
-//
-//        ResponseEntity<List> response = restTemplate.getForEntity("/v1/api/merchants", List.class);
-//
-//        assertThat(response.getStatusCode()).isEqualTo(OK);
+        merchantService.stubFor(get("/v1/api/merchants").willReturn(aResponse()
+                .withHeader("Content-Type", "application/json")
+                .withBody("""
+                        [
+                            { "name": "amazon", "site": "amazon.com" },
+                            { "name": "ebay", "site": "ebay.com" }
+                        ]
+                        """)));
+
+        ResponseEntity<List> response = restTemplate.getForEntity("/v1/api/merchants", List.class);
+
+        assertThat(response.getStatusCode()).isEqualTo(OK);
     }
 }
